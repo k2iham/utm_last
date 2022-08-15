@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<head>
+  <title>UTM-Builder</title>
+  <meta charset="utf-8">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <link rel="stylesheet" type="text/css" target="_blank" href="style.css">
+</head>
+
+<body style="font-size: 20px;">
+
+  <div class="head">
+    <h1 style="text-align: center">UTM-Builder</h1>
+  </div>
+
+  <div class="main">
+
+    <p><b>Enter the url for this initiative:</b>
+      <br />
+      <input id="url" placeholder="www.airasia.com" onchange="displayVals ()" required>
+      </input>
+      <br />
+      <small> <span style="color: #B22222;"> Mandatory. </span>This is the URL of your page. It can be any web page. For
+        example, <i>www.airasia.com</i> </small>
+      <br />
+      <b id="urlouttext"
+        style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif; color: rgba(0, 51, 91, 1) , monospace"></b>
+    </p>
+
+    <script>
+      function displayVals() {
+        var urlout = $("#url").val();
+        $("#urlouttext").html("<b style='text-align: justify;' >Your full url with UTM codes: </b><br/>" + urlout + "?");
+      }
+      $("select").change(displayVals);
+      displayVals();
+    </script>
+
+    <form>
+
+      <p><b>Select your campaign medium: </b>
+        <br>
+        <small><em style="color: #B22222;">Mandatory.</em>This is the medium such as social media</small>
+        <br />
+
+        <select name="utm_medium">
+          <option>Select One</option>
+          <option>internal</option>
+          <option>paidsocial</option>
+
+        </select>
+      </p>
+
+      <p>
+        <b>Enter your source: </b>
+        <br />
+        <small><em style="color: #B22222;">Mandatory.</em> This is the source of the campaign </small>
+        <br />
+
+        <select name="utm_medium">
+          <option>Select One</option>
+          <option>aa_app</option>
+          <option>aa_inapp</option>
+          <option>aa_ads</option>
+          <option>aa_</option>
+          <option>aa_web</option>
+          <option>aa_chat</option>
+          <option>aa_herobanner</option>
+          <option>aa_homepage_carousel</option>
+          <option>aa_homepage_tiles</option>
+          <option>aa_promotions</option>
+          <option>aa_campaign_pages</option>
+        </select>
+      </p>
+
+      <p>
+        <b>Enter your campaign name: </b>
+        <br>
+        <small><em style="color: #B22222;">Mandatory.</em>This is the name of the campaign. (e.g
+          HEALTH_MY_AW|Awareness|10122020|my-en )</small>
+        <br />
+        <input type="text" name="utm_campaign" placeholder="e.g. dtmr-may2015-roadsafety" onchange="showValues()">
+        <br />
+      </p>
+
+      <p>
+        <b>Enter any UTM-term: </b>
+        <br>
+        <small><i>Optional.</i> If not being used, leave blank. </small>
+        <br />
+        <input type="text" name="utm_term" placeholder="e.g. snap,hotel,etc..." onchange="showValues()">
+        <br />
+
+      </p>
+
+      <p>
+        <B>Enter your UTM-content: </b>
+        <br>
+        <small><em style="color: #B22222;">Mandatory.</em>This is where you add UTM-contents.<B>Press 'enter' once
+            you're done.</b> </small>
+        <br />
+        <input type="text" name="utm_content" placeholder="e.g. pushnotification" onchange="showValues()">
+        <br />
+        <B>Press 'enter' once you've finished typing.</b>
+
+      </p>
+    </form>
+
+  </div>
+
+  <div class="results">
+    <p>
+      <br />
+      <b style="color: rgba(120, 185, 0, 1);"></b><b id="results"
+        style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif; color: rgba(0, 51, 91, 1);"></b>
+    </p>
+    <script>
+      $("#results").before($("#urlouttext"));
+
+      function showValues() {
+        var str = $("form").serialize();
+        $("#results").text(str);
+      }
+      showValues();
+    </script>
+  </div>
+  <div id="signout">
+    <button onclick="signOut()">Sign out</button>
+    <script>
+      function signOut() {
+        gapi.auth2.getAuthInstance().signOut().then(function () {
+          console.log('user signed out')
+        })
+      }
+    </script>
+  </div>
+</body>
+
+</html>
